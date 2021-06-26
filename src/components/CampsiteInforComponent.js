@@ -36,9 +36,11 @@ const CampsiteInfo = (props) => {
 
     if(props.campsite){ 
         return (
-        <div className="row">
-            {renderCampsite(props.campsite)}
-            {renderComments(props.campsite.comments)}
+        <div>
+            <div className="row">
+                {renderCampsite(props.campsite)}
+                {renderComments(props.campsite.comments)}
+            </div>
         </div>  
     )}
     return(<div/>);
