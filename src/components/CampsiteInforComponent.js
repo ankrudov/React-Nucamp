@@ -22,7 +22,7 @@ function RenderCampsite({campsite}){
          </div>
 );
 }
-function RenderComments({comments}){
+function RenderComments({comments, addComment, campsiteId}){
     if (comments){
         return(
             <div className="col-md-5 m-1">
@@ -36,7 +36,7 @@ function RenderComments({comments}){
                         </div>
                     );
                 })}
-                <CommentForm/> 
+                <CommentForm campsiteId={campsiteId} addComment={addComment}/> 
             </div>
         );
     }return(<div/>);
@@ -58,7 +58,10 @@ function RenderComments({comments}){
                 </div>
                 <div className="row">
                     <RenderCampsite campsite={props.campsite}/>
-                    <RenderComments comments={props.comments}/>
+                    <RenderComments 
+                    comments={props.comments}
+                    addComment={props.addComment}
+                    campsiteId={props.campsite.id}/>
                 </div>
             </div>  
         )}
@@ -71,17 +74,18 @@ class CommentForm extends Component{
         this.state = {
             isModalOpen: false,
             };
-    
+            this.handleSubmit=this.handleSubmit.bind(this);
             this.toggleModal = this.toggleModal.bind(this);
     }
     handleSubmit(values){
         this.toggleModal();
-        this.props.postComment(this.props.campsiteId, values.rating, values.author, values.text);
+        this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
+
     }
 
     toggleModal() {
         this.setState({
-            isModalOpen: !this.state.isModalOpen,
+            isModalOpen: !this.state.isModalOpen
     });
     }
 
@@ -92,9 +96,9 @@ class CommentForm extends Component{
                     <i className="fa fa-pencil fa-lg"/>Submit Comment
                 </Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Saturday 7/3/21</ModalHeader>
+                    <ModalHeader toggle={this.toggleModal}>Submit comment</ModalHeader>
                     <ModalBody>
-                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                        <LocalForm onSubmit={values => this.handleSubmit(values)}>
                             <div className="form-group">
                                 <label htmlFor='rating'>Rating</label>
                                 <Control.Select
@@ -151,7 +155,6 @@ class CommentForm extends Component{
                                 <Button
                                 onClick={this.submitForm}
                                 type='submit'
-                                value='submit'
                                 color='primary'
                                 >
                                 Submit
