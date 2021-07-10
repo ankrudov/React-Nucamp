@@ -3,7 +3,7 @@ import { comment } from 'postcss-selector-parser';
 import { COMMENTS } from '../shared/comments.js';
 import * as ActionTypes from './ActionTypes';
 
-export const comments = (state = COMMENTS, action) =>{
+export const Comments = (state = COMMENTS, action) =>{
     switch(action.type){
         case ActionTypes.ADD_COMMENT:
             const comments = action.payload;
