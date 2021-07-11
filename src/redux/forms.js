@@ -1,4 +1,4 @@
-export const initialFeedback = {
+export const InitialFeedback = {
     firstName: '',
     lastName: '',
     phoneNum: '',

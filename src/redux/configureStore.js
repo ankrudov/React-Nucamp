@@ -6,7 +6,7 @@ import { Comments } from './comments';
 import { Partners } from './partners';
 import { Campsites } from './campsites'
 import { Promotions } from './promotions';
-import {initialFeedback} from './forms';
+import {InitialFeedback} from './forms';
 
 export const ConfigureStore = () => {
     const store = createStore(
@@ -16,7 +16,7 @@ export const ConfigureStore = () => {
             partners:Partners,
             promotions:Promotions,
             ...createForms({
-                feedbackForm:initialFeedback
+                feedbackForm:InitialFeedback
             })
 
         }),
